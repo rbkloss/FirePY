@@ -1,5 +1,5 @@
 import numpy as np
-
+import logging
 
 class Firefly():
     def __init__(self, population_size=20, n_dims=1, n_iterations=200, step=0.9, annealling=0.97, absorption=1.5,
@@ -76,8 +76,10 @@ class Firefly():
         self.population = npop
         self.utilities_ = nuti
 
-        if ++self.iteration_counter > self.n_iterations:
+        self.iteration_counter += 1
+        if self.iteration_counter > self.n_iterations:
             return True
         if self.step < 0.001:
+            logging.info('Finishing due to setp <  0.001')
             return True
         return False
